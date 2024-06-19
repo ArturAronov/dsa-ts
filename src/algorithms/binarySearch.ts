@@ -66,7 +66,7 @@ binarySearch();
 /* 
   Find midpoint:
   m = ⌊ low + (high - low) / 2 ⌋
-        |          |
+         |          |
       offset    midpoint
 
   ⌊⌋ -> Math floor
