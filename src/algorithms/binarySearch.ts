@@ -1,5 +1,7 @@
 import { bubbleSort } from "./bubbleSort";
-import { randomNumGenerator } from "../utils";
+import { generateRandomNumArr, randomNumGenerator } from "../utils";
+
+const unsortedArr = generateRandomNumArr({});
 
 export const generateBinarySearchData = (): {
   pin: number;
@@ -8,7 +10,7 @@ export const generateBinarySearchData = (): {
 } => {
   // Generate random sorted array and generate the pin
   const doesContainNum = !!Math.floor(Math.random() * 2);
-  const arr = bubbleSort();
+  const arr = bubbleSort(unsortedArr);
   let pin;
 
   while (!pin) {

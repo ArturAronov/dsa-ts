@@ -1,22 +1,22 @@
 import { generateRandomNumArr } from "../utils";
 
-export const bubbleSort = () => {
-  const unsortedArr = generateRandomNumArr({});
+const unsortedArr = generateRandomNumArr({});
 
-  for (let i = 0; i < unsortedArr.length; i++) {
-    for (let j = 0; j < unsortedArr.length - 1 - i; j++) {
-      if (unsortedArr[j] > unsortedArr[j + 1]) {
-        const temp = unsortedArr[j];
-        unsortedArr[j] = unsortedArr[j + 1];
-        unsortedArr[j + 1] = temp;
+export const bubbleSort = (arr: number[]) => {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        const temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
       }
     }
   }
 
-  return unsortedArr;
+  return arr;
 };
 
-bubbleSort();
+bubbleSort(unsortedArr);
 
 /* 
   After each iteration, largest number always ends up at the end of the array
