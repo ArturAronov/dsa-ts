@@ -6,7 +6,6 @@ const unsortedArr = generateRandomNumArr({});
 export const generateBinarySearchData = (): {
   pin: number;
   arr: number[];
-  doesContainNum: boolean;
 } => {
   // Generate random sorted array and generate the pin
   const doesContainNum = !!Math.floor(Math.random() * 2);
@@ -23,11 +22,12 @@ export const generateBinarySearchData = (): {
     }
   }
 
-  return { pin, arr, doesContainNum };
+  return { pin, arr };
 };
 
-const binarySearch = () => {
-  const { pin, arr } = generateBinarySearchData();
+const { pin, arr } = generateBinarySearchData();
+
+export const binarySearch = ({ pin, arr }: { pin: number; arr: number[] }) => {
   let totalIterations = 0;
   let low = 0;
   let high = arr.length;
@@ -63,7 +63,7 @@ const binarySearch = () => {
   return false;
 };
 
-binarySearch();
+// binarySearch({ pin, arr });
 
 /* 
   Find midpoint:
