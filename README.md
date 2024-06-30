@@ -1,1 +1,1 @@
-Run: `npx ts-node <filename>.ts`
+Run: `npx ts-node /practice-w-/.ts`
