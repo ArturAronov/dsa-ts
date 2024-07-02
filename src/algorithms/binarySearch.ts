@@ -1,6 +1,16 @@
 import { bubbleSort } from "./bubbleSort";
 import { generateRandomNumArr, randomNumGenerator } from "../utils";
 
+export type BinarySearchReturnT = {
+  pinIndex?: number;
+  iterations: number;
+};
+
+export type BinarySearchPropsT = {
+  pin: number;
+  arr: number[];
+};
+
 const unsortedArr = generateRandomNumArr({});
 
 export const generateBinarySearchData = (): {
@@ -27,30 +37,25 @@ export const generateBinarySearchData = (): {
 
 const { pin, arr } = generateBinarySearchData();
 
-export const binarySearch = ({ pin, arr }: { pin: number; arr: number[] }) => {
-  let totalIterations = 0;
+export const binarySearch = ({
+  pin,
+  arr,
+}: BinarySearchPropsT): BinarySearchReturnT => {
+  let iterations = 0;
   let low = 0;
   let high = arr.length;
-  let foundIndex;
-
-  console.info("Finding pin: ", pin, " in array: ", arr);
+  let pinIndex;
 
   while (low < high) {
-    totalIterations++;
+    iterations++;
     const mid = Math.floor(low + (high - low) / 2);
     const value = arr[mid];
 
     if (value === pin) {
-      foundIndex = mid;
-      console.info(
-        "Found pin in index: ",
-        foundIndex,
-        " value: ",
-        arr[foundIndex]
-      );
-      console.log("Total iterations: ", totalIterations);
+      pinIndex = mid;
+      // console.info("Found pin in index: ", pinIndex, " value: ", arr[pinIndex]);
 
-      return true;
+      return { iterations, pinIndex };
     } else if (value > pin) {
       high = mid;
     } else {
@@ -58,9 +63,9 @@ export const binarySearch = ({ pin, arr }: { pin: number; arr: number[] }) => {
     }
   }
 
-  console.log("Total iterations: ", totalIterations);
-  console.info("No pin found in array");
-  return false;
+  // console.log("Total iterations: ", iterations);
+  // console.info("No pin found in array");
+  return { iterations };
 };
 
 // binarySearch({ pin, arr });
