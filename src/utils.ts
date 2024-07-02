@@ -34,7 +34,7 @@ export const generateRandomNumArr = (data: generateRandomNumArrT) => {
   return arr;
 };
 
-export const compareTwoArrays = (arr1: any[], arr2: any[]) => {
+export const compareTwoArrays = (arr1: any[], arr2: any[], log?: boolean) => {
   if (arr1.length !== arr2.length) {
     console.log("Two arrays have mismatch length");
     return false;
@@ -49,7 +49,10 @@ export const compareTwoArrays = (arr1: any[], arr2: any[]) => {
     }
   }
 
-  console.log("Both arrays match");
+  if (log) {
+    console.log("Both arrays match");
+  }
+
   return true;
 };
 
