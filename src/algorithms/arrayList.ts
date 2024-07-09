@@ -10,35 +10,63 @@ export default class ArrayList<T> {
   add(item: T): void {
     let availableIndex;
     let low = 0;
-    let high = this.length;
+    let high = this.length - 1;
+    if (this.array[0] === undefined) availableIndex = 0;
 
     while (low < high && !availableIndex) {
       const mid = Math.floor((low + high) / 2);
 
-      if (!this.array[mid] && this.array[mid - 1]) {
+      if (this.array[mid] === undefined && this.array[mid - 1]) {
         availableIndex = mid;
         break;
-      } else if (!this.array[mid]) {
+      } else if (this.array[mid] === undefined) {
         high = mid;
       } else {
         low = mid + 1;
       }
     }
 
-    if (!availableIndex) {
+    if (
+      availableIndex === undefined &&
+      this.array[this.length - 1] !== undefined
+    ) {
       availableIndex = this.length;
       const tempArray = this.array;
-      this.array = new Array(this.length * 2);
-      this.array = [...tempArray];
+      this.length *= 2;
+      this.array = new Array(this.length);
+
+      for (let i = 0; i < tempArray.length; i++) {
+        this.array[i] = tempArray[i];
+      }
+    } else if (availableIndex === undefined) {
+      availableIndex = this.length - 1;
     }
 
     this.array[availableIndex] = item;
-    this.length++;
   }
 
   pop(): void {
-    this.array[length] = undefined;
-    this.length--;
+    let lastIndex;
+    let low = 0;
+    let high = this.length - 1;
+
+    while (low < high && !lastIndex) {
+      const mid = Math.floor((low + high) / 2);
+
+      if (this.array[mid] === undefined && this.array[mid - 1]) {
+        lastIndex = mid;
+        break;
+      } else if (this.array[mid] === undefined) {
+        high = mid;
+      } else {
+        low = mid + 1;
+      }
+    }
+
+    if (lastIndex) {
+      this.array[lastIndex - 1] = undefined;
+      this.length--;
+    }
   }
 
   get(index: number): T | undefined {
