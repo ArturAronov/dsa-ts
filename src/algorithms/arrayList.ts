@@ -1,16 +1,16 @@
 export default class ArrayList<T> {
-  private length: number;
-  private lastPointer: number;
+  length: number;
+  #lastPointer: number;
   public array: Array<T | undefined> = new Array();
 
   constructor(initLength: number) {
-    this.lastPointer = 0;
+    this.#lastPointer = 0;
     this.length = initLength;
     this.array = new Array(initLength);
   }
 
   public add(item: T): void {
-    if (this.lastPointer === this.length) {
+    if (this.#lastPointer === this.length) {
       const tempArray = this.array;
       this.length *= 2;
       this.array = new Array(this.length);
@@ -19,15 +19,15 @@ export default class ArrayList<T> {
         this.array[i] = tempArray[i];
       }
     }
-    this.array[this.lastPointer] = item;
-    this.lastPointer++;
+    this.array[this.#lastPointer] = item;
+    this.#lastPointer++;
   }
 
   public pop(): void {
-    if (this.lastPointer) {
-      this.array[this.lastPointer - 1] = undefined;
+    if (this.#lastPointer) {
+      this.array[this.#lastPointer - 1] = undefined;
       this.length--;
-      this.lastPointer--;
+      this.#lastPointer--;
     }
   }
 
