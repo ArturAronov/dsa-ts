@@ -1,7 +1,7 @@
 import {
+  binarySearch,
   BinarySearchPropsT,
   BinarySearchReturnT,
-  binarySearch,
   generateBinarySearchData,
 } from "../algorithms/binarySearch";
 
