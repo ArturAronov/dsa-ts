@@ -2,9 +2,9 @@ export default class ArrayList<T> {
   private length: number;
   public array: Array<T | undefined> = new Array();
 
-  constructor() {
-    this.length = 3;
-    this.array = new Array(3);
+  constructor(initLength: number) {
+    this.length = initLength;
+    this.array = new Array(initLength);
   }
 
   add(item: T): void {
