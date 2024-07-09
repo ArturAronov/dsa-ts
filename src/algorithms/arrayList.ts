@@ -7,17 +7,16 @@ export default class ArrayList<T> {
     this.array = new Array(initLength);
   }
 
-  add(item: T): void {
-    let availableIndex;
+  traverse(): number | undefined {
+    let searchIndex;
     let low = 0;
     let high = this.length - 1;
-    if (this.array[0] === undefined) availableIndex = 0;
 
-    while (low < high && !availableIndex) {
+    while (low < high && !searchIndex) {
       const mid = Math.floor((low + high) / 2);
 
       if (this.array[mid] === undefined && this.array[mid - 1]) {
-        availableIndex = mid;
+        searchIndex = mid;
         break;
       } else if (this.array[mid] === undefined) {
         high = mid;
@@ -25,6 +24,15 @@ export default class ArrayList<T> {
         low = mid + 1;
       }
     }
+
+    return searchIndex;
+  }
+
+  add(item: T): void {
+    let availableIndex = this.traverse();
+    let low = 0;
+    let high = this.length - 1;
+    if (this.array[0] === undefined) availableIndex = 0;
 
     if (
       availableIndex === undefined &&
@@ -46,23 +54,7 @@ export default class ArrayList<T> {
   }
 
   pop(): void {
-    let lastIndex;
-    let low = 0;
-    let high = this.length - 1;
-
-    while (low < high && !lastIndex) {
-      const mid = Math.floor((low + high) / 2);
-
-      if (this.array[mid] === undefined && this.array[mid - 1]) {
-        lastIndex = mid;
-        break;
-      } else if (this.array[mid] === undefined) {
-        high = mid;
-      } else {
-        low = mid + 1;
-      }
-    }
-
+    const lastIndex = this.traverse();
     if (lastIndex) {
       this.array[lastIndex - 1] = undefined;
       this.length--;
