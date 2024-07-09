@@ -7,31 +7,8 @@ export default class ArrayList<T> {
     this.array = new Array(initLength);
   }
 
-  traverse(): number | undefined {
-    let searchIndex;
-    let low = 0;
-    let high = this.length - 1;
-
-    while (low < high && !searchIndex) {
-      const mid = Math.floor((low + high) / 2);
-
-      if (this.array[mid] === undefined && this.array[mid - 1]) {
-        searchIndex = mid;
-        break;
-      } else if (this.array[mid] === undefined) {
-        high = mid;
-      } else {
-        low = mid + 1;
-      }
-    }
-
-    return searchIndex;
-  }
-
-  add(item: T): void {
+  public add(item: T): void {
     let availableIndex = this.traverse();
-    let low = 0;
-    let high = this.length - 1;
     if (this.array[0] === undefined) availableIndex = 0;
 
     if (
@@ -53,7 +30,7 @@ export default class ArrayList<T> {
     this.array[availableIndex] = item;
   }
 
-  pop(): void {
+  public pop(): void {
     const lastIndex = this.traverse();
     if (lastIndex) {
       this.array[lastIndex - 1] = undefined;
@@ -61,7 +38,28 @@ export default class ArrayList<T> {
     }
   }
 
-  get(index: number): T | undefined {
+  public get(index: number): T | undefined {
     return this.array[index];
+  }
+
+  private traverse(): number | undefined {
+    let searchIndex;
+    let low = 0;
+    let high = this.length - 1;
+
+    while (low < high) {
+      const mid = Math.floor((low + high) / 2);
+
+      if (this.array[mid] === undefined && this.array[mid - 1]) {
+        searchIndex = mid;
+        break;
+      } else if (this.array[mid] === undefined) {
+        high = mid;
+      } else {
+        low = mid + 1;
+      }
+    }
+
+    return searchIndex;
   }
 }
